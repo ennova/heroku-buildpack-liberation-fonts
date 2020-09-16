@@ -20,3 +20,15 @@ function error() {
 function topic() {
   echo "-----> $*"
 }
+
+FONT_TARBALL_URL="https://github.com/liberationfonts/liberation-fonts/files/4743886/liberation-fonts-ttf-2.1.1.tar.gz"
+
+topic "Retrieving Font tarball"
+font_filename="$(basename "$FONT_TARBALL_URL")"
+tarball_path="${CACHE_DIR}/${font_filename}"
+wget -c -O "$tarball_path" "$FONT_TARBALL_URL"
+
+topic "Installing into .fonts"
+fonts_dir="${BUILD_DIR}/.fonts"
+mkdir -p "$fonts_dir"
+tar -C "$fonts_dir" -vzxf "$tarball_path" --wildcards '*.ttf'
