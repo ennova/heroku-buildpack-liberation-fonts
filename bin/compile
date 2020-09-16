@@ -32,3 +32,6 @@ topic "Installing into .fonts"
 fonts_dir="${BUILD_DIR}/.fonts"
 mkdir -p "$fonts_dir"
 tar -C "$fonts_dir" -vzxf "$tarball_path" --wildcards '*.ttf'
+
+topic "Updating fontconfig cache"
+fc-cache -fv
